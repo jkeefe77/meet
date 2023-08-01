@@ -1,3 +1,7 @@
+Introduction
+
+Serverless technology has become a popular choice for modern web applications due to its flexibility, scalability, and cost-effectiveness. In this document, we will explore how a React app can leverage serverless technology to implement the features described in this README.md file.
+
 Feature 2: Show/Hide Event Details
 
 Scenario 1: An event element is collapsed by default
