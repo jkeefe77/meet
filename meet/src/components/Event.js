@@ -2,10 +2,9 @@
 import { useState } from "react";
 
 const Event = ({ event }) => {
- // console.log("Event data:", event);
   const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => {
-    setShowDetails(showDetails);
+    setShowDetails(!showDetails);
   };
   return (
     <li>

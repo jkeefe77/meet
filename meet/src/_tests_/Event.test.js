@@ -5,15 +5,15 @@ import userEvent from "@testing-library/user-event";
 
 const mockEvent = mockData[0];
 
-describe("<Event /> Component", () => {
-  const setup = (events = []) => {
-    render(<Event events={events} />);
+describe("<Event /> component", () => {
+  const setup = (event = []) => {
+    render(<Event event={event} />);
   };
 
   test("has the events title", () => {
     setup();
-    const title = screen.queryByText(mockEvent.summary);
-    expect(title).toBeInTheDocument();
+    render(<Event event={event} />);
+    expect(screen.getByText(event.summary)).toHaveTextContent();
   });
 
   test("has the events time", () => {
