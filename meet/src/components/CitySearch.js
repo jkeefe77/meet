@@ -1,9 +1,13 @@
-import { useState} from "react";
+import { useState, useEffect } from 'react';
 
 const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    setSuggestions(allLocations);
+  }, [`${allLocations}`]);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
@@ -12,7 +16,6 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
           return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
         })
       : [];
-
     setQuery(value);
     setSuggestions(filteredLocations);
   };
@@ -20,21 +23,21 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
   const handleItemClicked = (event) => {
     const value = event.target.textContent;
     setQuery(value);
-    setShowSuggestions(false); // to hide the list
+    setShowSuggestions(false);
     setCurrentCity(value);
   };
+
   return (
-    <div data-testid="city-search">
+    <div id="city-search">
       <input
         type="text"
         className="city"
         placeholder="Search for a city"
         value={query}
-        on
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
-      {showSuggestions && query.length !==0 ? (
+      {showSuggestions ? (
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
             return (
