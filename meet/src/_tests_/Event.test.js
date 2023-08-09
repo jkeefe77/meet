@@ -13,7 +13,7 @@ describe("<Event /> component", () => {
   test("has the events title", () => {
     setup();
     render(<Event event={event} />);
-    expect(screen.getByText(event.summary)).toHaveTextContent();
+    expect(screen.getByText(event.summary)).toBeInTheDocument();
   });
 
   test("has the events time", () => {
