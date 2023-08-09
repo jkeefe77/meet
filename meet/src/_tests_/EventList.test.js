@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import EventList from "../components/EventList";
 import { getEvents } from "../api";
 
+
 describe("<EventList /> component", () => {
   const setup = (events = []) => {
     render(<EventList events={events} />);
