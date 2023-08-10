@@ -4,6 +4,7 @@ const CitySearch = ({ allLocations }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+
   const handleInputChanged = (event) => {
     const value = event.target.value;
     const filteredLocations = allLocations
@@ -15,11 +16,13 @@ const CitySearch = ({ allLocations }) => {
     setQuery(value);
     setSuggestions(filteredLocations);
   };
+
   const handleItemClicked = (event) => {
     const value = event.target.textContent;
     setQuery(value);
     setShowSuggestions(false); // to hide the list
   };
+
   return (
     <div id="city-search">
       <input
