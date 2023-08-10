@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import NumberOfEvents from "../components/NumberofEvents.js";
+import NumberofEvents from "./components/NumberofEvents";
 
 describe("<NumberOfEvents /> Component", () => {
   const setup = () => {
     render(
-      <NumberOfEvents eventNumber={1} onEventNumberChange={(number) => {}} />
+      <NumberofEvents eventNumber={1} onEventNumberChange={(number) => {}} />
     );
   };
 
