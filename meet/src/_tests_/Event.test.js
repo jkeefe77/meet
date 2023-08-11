@@ -1,11 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Event from "../components/Event";
 import mockData from "../mock-data";
 import userEvent from "@testing-library/user-event";
 
 const mockEvent = mockData[0];
 
-<<<<<<< HEAD
 describe("<Event /> Component", () => {
   let EventComponent;
   beforeEach(() => {
@@ -15,17 +14,7 @@ describe("<Event /> Component", () => {
   test("has the events title", () => {
     const title = EventComponent.queryByText(mockEvent.summary);
     expect(title).toBeInTheDocument();
-=======
-describe("<Event /> component", () => {
-  const setup = (event = []) => {
-    render(<Event event={event} />);
-  };
 
-  test("has the events title", () => {
-    setup();
-    render(<Event event={event} />);
-    expect(screen.getByText(event.summary)).toBeInTheDocument();
->>>>>>> auth
   });
 
   test("has the events time", () => {

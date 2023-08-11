@@ -1,13 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
-<<<<<<< HEAD
-=======
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
->>>>>>> auth
   return (
     <li className="event">
       <h3>{event.summary}</h3>
@@ -19,7 +13,7 @@ const Event = ({ event }) => {
           setShowDetails(!showDetails);
         }}
       >
-        {showDetails ? 'Hide Details' : 'Show Details'}
+        {showDetails ? "Hide Details" : "Show Details"}
       </button>
       {showDetails ? (
         <div className="details">

@@ -1,4 +1,4 @@
-import { render, within, waitFor, screen } from "@testing-library/react";
+import { render, within, waitFor } from "@testing-library/react";
 import EventList from "../components/EventList";
 import { getEvents } from "../api";
 import App from "../App";
@@ -18,11 +18,6 @@ describe("<EventList /> component", () => {
     expect(EventListComponent.getAllByRole("listitem")).toHaveLength(
       allEvents.length
     );
-
-    // EventListComponent.rerender(
-    //   <EventList events={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]} />
-    // );
-    // expect(EventListComponent.getAllByRole('listitem')).toHaveLength(4);
   });
 });
 
