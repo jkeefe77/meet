@@ -8,11 +8,11 @@ node_modules/
 
 # testing
 coverage
-coverage/
+/coverage/
 
 # production
 build
-build/
+/build/
 
 # misc
 .DS_Store
