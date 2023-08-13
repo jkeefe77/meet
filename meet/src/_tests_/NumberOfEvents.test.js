@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import NumberOfEvents from "./components/NumberOfEvents";
+import NumberOfEvents from "../components/NumberOfEvents";
 
 describe("<NumberOfEvents /> Component", () => {
   let NumberOfEventsComponent;
