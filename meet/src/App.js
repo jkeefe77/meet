@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EventList from "./components/EventList";
 import CitySearch from "./components/CitySearch";
-import NumberofEvents from "./components/NumberofEvents";
+import NumberOfEvents from "./components/NumberOfEvents";
 import { extractLocations, getEvents } from "./api";
 import "./App.css";
 
@@ -29,7 +29,7 @@ const App = () => {
     <div className="App">
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
       <EventList events={events} />
-      <NumberofEvents setCurrentNOE={setCurrentNOE} />
+      <NumberOfEvents setCurrentNOE={setCurrentNOE} />
     </div>
   );
 };
