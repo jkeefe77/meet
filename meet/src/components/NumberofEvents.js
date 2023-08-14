@@ -1,17 +1,28 @@
-const NumberOfEvents = ({ setCurrentNOE }) => {
-  const handleInputChanged = (event) => {
+import React, { useState } from "react";
+
+const NumberOfEvents = ({ numberOfEvents, onInputChange }) => {
+  const [inputValue, setInputValue] = useState(numberOfEvents);
+
+  const handleInputChange = (event) => {
     const value = event.target.value;
-    setCurrentNOE(value);
+    setInputValue(value);
+    onInputChange(event); // Notify the parent component about the change
   };
 
   return (
-    <div id="number-of-events">
+    <div>
+      <label htmlFor="numberOfEvents">Number of Events:</label>
       <input
-        type="text"
-        defaultValue="32"
-        onChange={handleInputChanged}
-        data-testid="numberOfEventsInput"
+        id="numberOfEvents"
+        data-testid="number-of-events-component"
+        type="number"
+        min="1"
+        max="100"
+        value={inputValue}
+        onChange={handleInputChange}
+        role="spinbutton" // Add the "role" attribute here
       />
+      <p>Showing {inputValue} events</p>
     </div>
   );
 };
