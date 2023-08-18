@@ -21,8 +21,7 @@ export const extractLocations = (events) => {
 
 const checkToken = async (accessToken) => {
   const response = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`,
-    { mode: "no-cors" }
+    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   );
   const result = await response.json();
   return result;
@@ -47,8 +46,7 @@ const getToken = async (code) => {
   const response = await fetch(
     "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/token" +
       "/" +
-      encodeCode,
-    { mode: "no-cors" }
+      encodeCode
   );
 
   const { access_token } = await response.json();
@@ -66,8 +64,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get("code");
     if (!code) {
       const response = await fetch(
-        "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url",
-        { mode: "no-cors" }
+        "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
       );
       const result = await response.json();
       const { authUrl } = result;
@@ -90,7 +87,7 @@ export const getEvents = async () => {
       "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-events" +
       "/" +
       token;
-    const response = await fetch(url, { mode: "no-cors" });
+    const response = await fetch(url);
     const result = await response.json();
     if (result) {
       return result.events;

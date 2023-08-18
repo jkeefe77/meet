@@ -6,7 +6,7 @@ const SCOPES = [
 ];
 
 const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env;
-const redirect_uris = ["https://jkeefe77.github.io/meet/"];
+const redirect_uris = ["https://jvkeefe77.github.io/meet/"];
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
