@@ -20,12 +20,16 @@ export const extractLocations = (events) => {
  */
 
 const checkToken = async (accessToken) => {
-  const response = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`,
-    { mode: "no-cors" }
-  );
-  const result = await response.json();
-  return result;
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error checking token:", error);
+    throw error;
+  }
 };
 const removeQuery = () => {
   let newurl;
@@ -43,57 +47,77 @@ const removeQuery = () => {
 };
 
 const getToken = async (code) => {
-  const encodeCode = encodeURIComponent(code);
-  const response = await fetch(
-    "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/token" +
-      "/" +
-      encodeCode,
-    { mode: "no-cors" }
-  );
+  try {
+    const encodeCode = encodeURIComponent(code);
+    const response = await fetch(
+      "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/token" +
+        "/" +
+        encodeCode
+    );
 
-  const { access_token } = await response.json();
-  access_token && localStorage.setItem("access_token", access_token);
-  return access_token;
+    const { access_token } = await response.json();
+    if (access_token) {
+      localStorage.setItem("access_token", access_token);
+      return access_token;
+    } else {
+      throw new Error("Access token not received");
+    }
+  } catch (error) {
+    console.error("Error getting token:", error);
+    throw error;
+  }
 };
 
 export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem("access_token");
-  const tokenCheck = accessToken && (await checkToken(accessToken));
+  try {
+    const accessToken = localStorage.getItem("access_token");
+    const tokenCheck = accessToken && (await checkToken(accessToken));
 
-  if (!accessToken || tokenCheck.error) {
-    await localStorage.removeItem("access_token");
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get("code");
-    if (!code) {
-      const response = await fetch(
-        "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url",
-        { mode: "no-cors" }
-      );
-      const result = await response.json();
-      const { authUrl } = result;
-      return (window.location.href = authUrl);
+    if (!accessToken || tokenCheck.error) {
+      await localStorage.removeItem("access_token");
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = await searchParams.get("code");
+      if (!code) {
+        const response = await fetch(
+          "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
+        );
+        const result = await response.json();
+        const { authUrl } = result;
+        window.location.href = authUrl;
+      } else {
+        return await getToken(code);
+      }
     }
-    return code && getToken(code);
+    return accessToken;
+  } catch (error) {
+    console.error("Error getting access token:", error);
   }
-  return accessToken;
 };
+
 export const getEvents = async () => {
-  if (window.location.href.startsWith("http://localhost")) {
-    return mockData;
-  }
+  try {
+    if (window.location.href.startsWith("http://localhost")) {
+      return mockData;
+    }
 
-  const token = await getAccessToken();
+    const token = await getAccessToken();
 
-  if (token) {
-    removeQuery();
-    const url =
-      "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-events" +
-      "/" +
-      token;
-    const response = await fetch(url, { mode: "no-cors" });
-    const result = await response.json();
-    if (result) {
-      return result.events;
-    } else return null;
+    if (token) {
+      removeQuery();
+      const url =
+        "https://yr2jwknznh.execute-api.us-east-1.amazonaws.com/dev/api/get-events" +
+        "/" +
+        token;
+      const response = await fetch(url);
+      const result = await response.json();
+      if (result) {
+        return result.events;
+      } else {
+        return null;
+      }
+    }
+  } catch (error) {
+    console.error("Error getting events:", error);
+    throw error;
   }
 };
