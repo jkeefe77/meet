@@ -6,20 +6,21 @@ import App from "../App";
 
 describe("<CitySearch /> component", () => {
   test("renders text input", () => {
-    render(<CitySearch allLocations={[]} />);
+    render(<CitySearch allLocations={[]} setInfoAlert={() => { }}  />);
     const cityTextBox = screen.getByRole("textbox"); // Change to getByRole
     expect(cityTextBox).toBeInTheDocument();
     expect(cityTextBox).toHaveClass("city");
   });
 
   test("suggestions list is hidden by default", () => {
-    render(<CitySearch allLocations={[]} />);
+    render(<CitySearch allLocations={[]} setInfoAlert={() => { }} />);
     const suggestionList = screen.getByRole("list"); // Change to queryByRole
     expect(suggestionList).not.toBeInTheDocument();
   });
 
   test("renders the suggestion text in the textbox upon clicking on the suggestion", async () => {
-    render(<CitySearch allLocations={[]} setCurrentCity={() => {}} />);
+    render(<CitySearch allLocations={[]} setCurrentCity={() => {}} 
+    setInfoAlert={() => { }} />);
     const cityTextBox = screen.getByRole("textbox"); // Change to getByRole
     await userEvent.type(cityTextBox, "Berlin");
 
