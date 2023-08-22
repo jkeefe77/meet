@@ -27,15 +27,13 @@ const App = () => {
 
   useEffect(() => {
     if (navigator.onLine) {
-      this.setState({
-        offLineText:
-          "You are currently offline.  Connect to the internet to see new events",
-      });
+      // Online: set the warning alert message to an empty string ""
+      setWarningAlert("");
     } else {
-      this.setState({
-        offlineText: "",
-        // set the warning alert message to a non-empty string
-      });
+      // Offline: set the warning alert message to a non-empty string
+      setWarningAlert(
+        "You are currently offline. Connect to the internet to see new events"
+      );
     }
     fetchData();
   }, [currentCity, currentNOE, fetchData]);
