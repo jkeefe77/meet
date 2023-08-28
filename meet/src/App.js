@@ -1,6 +1,6 @@
 import EventList from "./components/EventList";
 import CitySearch from "./components/CitySearch";
-import NumberOfEvents from "./components/NumberOfEvents";
+import NumberOfEvents from "./components/NumberofEvents";
 import CityEventsChart from "./components/CityEventsChart";
 import EventGenresChart from "./components/EventGenresChart";
 import "./App.css";
